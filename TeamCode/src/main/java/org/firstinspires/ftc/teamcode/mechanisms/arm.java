@@ -52,6 +52,7 @@ public class Arm {
         cascade.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
+    /*
     public void moveArmToCm(double cm) {
         cascade.setTargetPosition(cmToRotations(cm));
         cascade.setPower(powerUsed);
@@ -65,6 +66,8 @@ public class Arm {
     public double rotationsToCm(int rotations) {
         return (rotations * conversionFactor);
     }
+
+     */
 
 
 //NEED TO TEST ARM LEVEL VALUES
