@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -18,9 +18,10 @@ public class Robot {
     public DcMotor lf;
     public DcMotor lb;
 
-    public DcMotor cascade;
+    public DcMotor leftLift;
+    public DcMotor rightLift;
     public DcMotor intake;
-    public CRServo box;
+    public Servo box;
 
     public IDriving driving;
 
@@ -37,13 +38,14 @@ public class Robot {
         driving = new StrafeDrive(rf, rb, lf, lb);
 
         //cascade
-        cascade = map.tryGet(DcMotor.class, "cascade");
+        rightLift = map.tryGet(DcMotor.class, "right lift");
+        leftLift = map.tryGet(DcMotor.class, "left lift");
 
         //intake
         intake = map.tryGet(DcMotor.class, "intake");
 
         //box
-        box = map.tryGet(CRServo.class, "box");
+        box = map.tryGet(Servo.class, "box");
 
     }
 
