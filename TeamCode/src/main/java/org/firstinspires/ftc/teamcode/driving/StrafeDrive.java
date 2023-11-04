@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.driving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.driving.IDriving;
 
@@ -11,19 +12,31 @@ public class StrafeDrive implements IDriving {
     private DcMotor lf;
     private DcMotor lb;
 
-    public StrafeDrive(DcMotor rf, DcMotor rb, DcMotor lf, DcMotor lb) {
-        rf = rf;
-        rb = rb;
-        lf = lf;
-        lb =lb;
+    private float speed = 0.5f;
 
+    public StrafeDrive(DcMotor rf, DcMotor rb, DcMotor lf, DcMotor lb) {
+        this.rf = rf;
+        this.rb = rb;
+        this.lf = lf;
+        this.lb =lb;
+
+        //This corrects the 2022-2023 13620 wiring!! may need to switch for this year's robots
+        this.rf.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.rb.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    public void joystickDrive (float x, float y, float t){
-        rf.setPower(y - x - t);
-        rb.setPower(y + x - t);
-        lf.setPower(y + x + t);
-        lb.setPower(y - x + t);
+    public void joystickDrive (float X, float Y, float T) {
+        //threshold for values (bc our controllers are old and bad)
+        //these are condensed if statements
+        float x = (Math.abs(X) < 0.2f) ? 0 : X;
+        float y = (Math.abs(Y) < 0.2f) ? 0 : Y;
+        float t = (Math.abs(T) < 0.2f) ? 0 : T;
+
+        //explanation in drive and slack
+        rf.setPower((y - x - t) * speed);
+        rb.setPower((y + x - t) * speed);
+        lf.setPower((y + x + t) * speed);
+        lb.setPower((y - x + t) * speed);
     }
 
     public void turn (float t) {
