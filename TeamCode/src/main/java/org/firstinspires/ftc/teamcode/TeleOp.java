@@ -15,6 +15,7 @@ public class TeleOp extends LinearOpMode {
     public DcMotor cascadeMotor;
     public DcMotor intakeMotor;
     public CRServo boxServo;
+    public boolean open = true;
 
     public void runOpMode() throws InterruptedException {
         arm = new Arm(cascadeMotor, intakeMotor, boxServo);
@@ -82,8 +83,8 @@ public class TeleOp extends LinearOpMode {
             //         INTAKE
             //______________________________
 
-                //random number right now
-                //NEEDS TESTING
+            //random number right now
+            //NEEDS TESTING
             if (gamepad2.right_bumper)
                 arm.rotateIntake(450);
 
@@ -91,10 +92,18 @@ public class TeleOp extends LinearOpMode {
             //         BOX
             //______________________________
 
-            if (gamepad2.a)
-                arm.boxControls("open");
-            if (gamepad2.b)
-                arm.boxControls("close");
+            if (gamepad2.a) {
+                if (open) {
+                    arm.boxControls("open");
+                    telemetry.addData("box is open?", open);
+                    telemetry.update();
+                } else {
+                    arm.boxControls("close");
+                    telemetry.addData("box is open?", !open);
+                    telemetry.update();
+                }
+                open = !open;
             }
         }
     }
+}
