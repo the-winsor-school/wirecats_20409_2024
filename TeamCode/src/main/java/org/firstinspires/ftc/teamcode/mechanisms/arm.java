@@ -5,10 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.CRServo;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.ServoController;
 
-public class arm {
+public class Arm {
 
     LinearOpMode linearOpMode;
     OpMode opMode;
@@ -18,6 +16,7 @@ public class arm {
 */
 
     //motors + servos
+
     public DcMotor cascade;
     public DcMotor intake;
     public CRServo box;
@@ -28,7 +27,7 @@ public class arm {
     //goes from inches to rotations
     int conversionFactor = 144; //for every 1 inch up
 
-    public arm(DcMotor cascadeMotor, DcMotor intakeMotor, CRServo boxServo) {
+    public Arm(DcMotor cascadeMotor, DcMotor intakeMotor, CRServo boxServo) {
         cascade = cascadeMotor;
         intake = intakeMotor;
         box = boxServo;
@@ -103,13 +102,16 @@ public class arm {
             servo = servoInit;
         }
 
+        /*
         public void moveDegrees(float degrees) {
             double position = degrees / 360;
             servo.setPower(position);
         }
-    }
 
-    public void clawControls(String pos) {
+         */
+    }
+//power NEEDS TESTING
+    public void boxControls(String pos) {
         if (pos == "open") { //open
             box.setPower(0.5);
         } else if (pos == "close") { //close
