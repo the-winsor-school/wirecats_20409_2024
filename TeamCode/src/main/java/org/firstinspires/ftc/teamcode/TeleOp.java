@@ -85,7 +85,7 @@ public class TeleOp extends LinearOpMode {
 
             //random number right now
             //NEEDS TESTING
-            if (gamepad2.right_bumper)
+            if (gamepad2.b)
                 arm.rotateIntake(450);
 
             //______________________________
