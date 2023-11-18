@@ -66,7 +66,7 @@ public class GridDrive implements IDriving {
     private void setEachPower (float rfp, float rbp, float lfp, float lbp) {
         rf.setPower(rfp);
         lf.setPower(rbp);
-        lf.setPower(lfp);
+        rb.setPower(lfp);
         lb.setPower(lbp);
     }
 

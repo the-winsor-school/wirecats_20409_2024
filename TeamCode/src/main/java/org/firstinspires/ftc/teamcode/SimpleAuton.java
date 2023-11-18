@@ -9,12 +9,11 @@ import org.firstinspires.ftc.teamcode.driving.*;
 
 @Autonomous(name="test auto")
 public class SimpleAuton extends LinearOpMode {
+
     Robot robot;
-    LinearOpMode opMode;
-    IDriving driving;
 
     public void runOpMode() throws InterruptedException {
-        robot = new Robot(opMode);
+        robot = new Robot(this);
 
         while (opModeIsActive()) {
 
