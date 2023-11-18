@@ -2,31 +2,62 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.driving.GridDrive;
 import org.firstinspires.ftc.teamcode.driving.IDriving;
 import org.firstinspires.ftc.teamcode.driving.StrafeDrive;
+import org.firstinspires.ftc.teamcode.Arm.FullArm;
 
+/**
+ * In this file we:
+ * initalize all the sensors, motors, and libraries
+ * the motors and sensors go here so we are only initializing them in one place in the whole repo
+ * (to avoid mistakes and conflicts)
+ * the libraries like IDriving and arm etc are intialized here so they are also only in one place
+ * the libaries also ahve access to everything within the robot class like the motors if they are intialized in this way
+ * when you create a new opMode you should only initlaize the robot class (by passing the opMode (by writing "this" in the parentheses)
+ * you cannot access any of the sensors or motors outside of this class (because encapsulation and saefty)
+ * you can only control things by using the libraries and the functions within them that are public
+ */
 public class Robot {
 
+    /**
+     * itializtion of all sensors and motors
+     */
     //wheels
     //rf, rb, lf, lb
-    public DcMotor rf;
-    public DcMotor rb;
-    public DcMotor lf;
-    public DcMotor lb;
+    private DcMotor rf;
+    private DcMotor rb;
+    private DcMotor lf;
+    private DcMotor lb;
 
-    public DcMotor cascade;
-    public DcMotor intake;
-    public CRServo box;
+    //arm
+    private DcMotor cascadeMotor;
+    private DcMotor clawAngleMotor;
+    private CRServo rightServo;
+    private CRServo leftServo;
 
+    //sensors
+    private ColorSensor colorSensor;
+
+
+    /**
+     * itialization of libraires
+     */
     public IDriving driving;
+    public FullArm arm;
 
 
+    private LinearOpMode opMode;
+
+    /**
+     * @param opMode pass by writing: new Robot(this);
+     */
     public Robot(LinearOpMode opMode) {
         HardwareMap map = opMode.hardwareMap;
+        this.opMode = opMode;
 
         //wheels
         rf = map.tryGet(DcMotor.class, "rf");
@@ -34,17 +65,51 @@ public class Robot {
         lf = map.tryGet(DcMotor.class, "lf");
         lb = map.tryGet(DcMotor.class, "lb");
 
+        //arm
+        cascadeMotor = map.tryGet(DcMotor.class, "cascade");
+        clawAngleMotor = map.tryGet(DcMotor.class, "claw angle");
+        rightServo = map.tryGet(CRServo.class, "right");
+        leftServo = map.tryGet(CRServo.class, "left");
+
+        //sensors
+        colorSensor = map.tryGet(ColorSensor.class, "color");
+
+        /**
+         * currently using StrafeDrive
+         */
         driving = new StrafeDrive(rf, rb, lf, lb);
+        arm = new FullArm(cascadeMotor, clawAngleMotor, rightServo, leftServo);
+    }
 
-        //cascade
-        cascade = map.tryGet(DcMotor.class, "cascade");
-
-        //intake
-        intake = map.tryGet(DcMotor.class, "intake");
-
-        //box
-        box = map.tryGet(CRServo.class, "box");
+    public void printWheelPowers() {
+        opMode.telemetry.addData("rf: ", rf.getPower());
+        opMode.telemetry.addData("lf: ", lf.getPower());
+        opMode.telemetry.addData("rb: ", rb.getPower());
+        opMode.telemetry.addData("lb: ", lb.getPower());
 
     }
 
+    public boolean checkRedTape() {
+        if (colorSensor.red()  > 500)
+            return true;
+        return false;
+    }
+
+    public boolean checkBlueTape() {
+        if (colorSensor.blue() > 500)
+            return true;
+        return false;
+    }
+
+    public boolean checkTape() {
+        if (checkBlueTape() || checkRedTape())
+            return true;
+        return false;
+    }
+
+    public void checkColorValues() {
+        opMode.telemetry.addData("red", colorSensor.red());
+        opMode.telemetry.addData("blue", colorSensor.blue());
+        opMode.telemetry.update();
+    }
 }
