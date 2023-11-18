@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.Arm.Claw;
 import org.firstinspires.ftc.teamcode.Arm.FullArm;
 
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Simple")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp")
 public class TeleOp extends LinearOpMode {
 
     Robot robot;
