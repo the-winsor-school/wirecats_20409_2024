@@ -12,15 +12,11 @@ import org.firstinspires.ftc.teamcode.mechanisms.Arm;
 public class TeleOp extends LinearOpMode {
     Arm arm;
     Robot robot;
-    public boolean open = true;
 
     public void runOpMode() throws InterruptedException {
         robot = new Robot(this);
         arm = new Arm(robot);
 
-
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
         waitForStart();
 
         while (opModeIsActive()) {
