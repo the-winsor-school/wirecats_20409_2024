@@ -67,7 +67,7 @@ public class Robot {
 
         //arm
         cascadeMotor = map.tryGet(DcMotor.class, "cascade");
-        clawAngleMotor = map.tryGet(DcMotor.class, "claw angle");
+        clawAngleMotor = map.tryGet(DcMotor.class, "clawAngle");
         rightServo = map.tryGet(CRServo.class, "right");
         leftServo = map.tryGet(CRServo.class, "left");
 
