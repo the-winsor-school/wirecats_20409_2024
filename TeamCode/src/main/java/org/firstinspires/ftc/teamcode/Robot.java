@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.driving.GridDrive;
@@ -27,12 +28,14 @@ public class Robot {
 
     public Robot(LinearOpMode opMode) {
         HardwareMap map = opMode.hardwareMap;
-
         //wheels
         rf = map.tryGet(DcMotor.class, "rf");
         rb = map.tryGet(DcMotor.class, "rb");
         lf = map.tryGet(DcMotor.class, "lf");
         lb = map.tryGet(DcMotor.class, "lb");
+
+        lb.setDirection(DcMotorSimple.Direction.REVERSE);
+        rf.setDirection(DcMotorSimple.Direction.REVERSE);
 
         driving = new StrafeDrive(rf, rb, lf, lb);
 
