@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Arm.Claw;
+import org.firstinspires.ftc.teamcode.Arm.FullArm;
 import org.firstinspires.ftc.teamcode.driving.*;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Simple")
@@ -48,15 +49,17 @@ public class TeleOp extends LinearOpMode {
             //_______________________________________________
 
             //arm manual controls
-            //TODO test for these rotations values
             if (gamepad2.dpad_up)
-                robot.arm.cascadeLift.changeTargetPosition(200);
-            if(gamepad2.dpad_down)
-                robot.arm.cascadeLift.changeTargetPosition(-200);
+                robot.arm.cascadeLift.changeTargetPosition(50);
+            if (gamepad2.dpad_down)
+                robot.arm.cascadeLift.changeTargetPosition(-50);
+            if (gamepad2.dpad_right)
+                robot.arm.clawAngleJoint.changeTargetPosition(25);
             if (gamepad2.dpad_left)
-                robot.arm.clawAngleJoint.changeTargetPosition(200);
-            if(gamepad2.dpad_right)
-                robot.arm.clawAngleJoint.changeTargetPosition(-200);
+                robot.arm.clawAngleJoint.changeTargetPosition(-25);
+
+            if (gamepad2.x)
+                robot.arm.claw.controlClaw(Claw.ClawPos.STOP);
 
             //claw controls
             if (gamepad2.right_bumper)
@@ -73,6 +76,8 @@ public class TeleOp extends LinearOpMode {
             telemetry.addData("t: ", t);
             */
 
+            telemetry.addLine("\n----------------ARM-------------------------");
+
             //arm current position
             telemetry.addData("cascade lift: ", robot.arm.cascadeLift.getCurrentPosition());
             telemetry.addData("claw angle joint: ", robot.arm.clawAngleJoint.getCurrentPosition());
@@ -81,10 +86,10 @@ public class TeleOp extends LinearOpMode {
             telemetry.addData("cascade lift: ", robot.arm.cascadeLift.getDirection());
             telemetry.addData("claw angle joint: ", robot.arm.clawAngleJoint.getDirection());
 
-            telemetry.addData("target cascade lift:: ", robot.arm.cascadeLift.targetPosition);
+            telemetry.addData("target cascade lift: ", robot.arm.cascadeLift.targetPosition);
             telemetry.addData("target claw angle joint: ", robot.arm.clawAngleJoint.targetPosition);
 
-            telemetry.addLine("----------------CLAW-------------------------");
+            telemetry.addLine("\n----------------CLAW-------------------------");
 
             telemetry.addData("right servo: ", robot.arm.claw.getPower("right"));
             telemetry.addData("left servo: ", robot.arm.claw.getPower("left"));
