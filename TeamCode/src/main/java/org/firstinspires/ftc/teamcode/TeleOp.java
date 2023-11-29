@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.Arm.Claw;
 import org.firstinspires.ftc.teamcode.driving.*;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Simple")
@@ -14,22 +15,80 @@ public class TeleOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         robot = new Robot(this);
+        robot.arm.resetEncoders();
 
         waitForStart();
 
         while (opModeIsActive()) {
 
-            //driving
+            //_______________________________________________
+            //             MAIN CONTROLLER
+            //_______________________________________________
+
             float x = gamepad1.right_stick_x;
             float y = -gamepad1.right_stick_y; //inputs from joystick are opposite
             float t = gamepad1.left_stick_x;
 
             robot.driving.joystickDrive(x, y, t);
 
+            //make wheels go faster
+            if (gamepad1.dpad_up)
+                robot.driving.adjustSpeed(0.05f);
+
+            //make wheels speed slower
+            if(gamepad1.dpad_down)
+                robot.driving.adjustSpeed(-0.05f);
+
+            //reset arm encoders
+            if (gamepad1.x)
+                robot.arm.resetEncoders();
+
+            //_______________________________________________
+            //             MECH CONTROLLER
+            //_______________________________________________
+
+            //arm manual controls
+            //TODO test for these rotations values
+            if (gamepad2.dpad_up)
+                robot.arm.cascadeLift.changeTargetPosition(200);
+            if(gamepad2.dpad_down)
+                robot.arm.cascadeLift.changeTargetPosition(-200);
+            if (gamepad2.dpad_left)
+                robot.arm.clawAngleJoint.changeTargetPosition(200);
+            if(gamepad2.dpad_right)
+                robot.arm.clawAngleJoint.changeTargetPosition(-200);
+
+            //claw controls
+            if (gamepad2.right_bumper)
+                robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
+            if (gamepad2.left_bumper)
+                robot.arm.claw.controlClaw(Claw.ClawPos.CLOSE);
+
+            robot.arm.cascadeLift.armLoop();
+            robot.arm.clawAngleJoint.armLoop();
+
             //telemetry
-            telemetry.addData("x: ", x);
+            /*telemetry.addData("x: ", x);
             telemetry.addData("y: ", y);
             telemetry.addData("t: ", t);
+            */
+
+            //arm current position
+            telemetry.addData("cascade lift: ", robot.arm.cascadeLift.getCurrentPosition());
+            telemetry.addData("claw angle joint: ", robot.arm.clawAngleJoint.getCurrentPosition());
+
+            //arm directions
+            telemetry.addData("cascade lift: ", robot.arm.cascadeLift.getDirection());
+            telemetry.addData("claw angle joint: ", robot.arm.clawAngleJoint.getDirection());
+
+            telemetry.addData("target cascade lift:: ", robot.arm.cascadeLift.targetPosition);
+            telemetry.addData("target claw angle joint: ", robot.arm.clawAngleJoint.targetPosition);
+
+            telemetry.addLine("----------------CLAW-------------------------");
+
+            telemetry.addData("right servo: ", robot.arm.claw.getPower("right"));
+            telemetry.addData("left servo: ", robot.arm.claw.getPower("left"));
+
             telemetry.update();
 
         }

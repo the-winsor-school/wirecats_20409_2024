@@ -41,4 +41,10 @@ public interface IDriving {
      */
     public void joystickDrive (float x, float y, float t);
 
+    /**
+     * changes the speed used for the motors
+     * @param x adds this value to the current speed;
+     */
+    public void adjustSpeed(float x);
+
 }

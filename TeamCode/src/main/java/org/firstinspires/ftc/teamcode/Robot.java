@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.Arm.*;
+
 import org.firstinspires.ftc.teamcode.driving.GridDrive;
 import org.firstinspires.ftc.teamcode.driving.IDriving;
 import org.firstinspires.ftc.teamcode.driving.StrafeDrive;
@@ -14,16 +16,18 @@ public class Robot {
 
     //wheels
     //rf, rb, lf, lb
-    public DcMotor rf;
-    public DcMotor rb;
-    public DcMotor lf;
-    public DcMotor lb;
+    private DcMotor rf;
+    private DcMotor rb;
+    private DcMotor lf;
+    private DcMotor lb;
 
-    public DcMotor cascade;
-    public DcMotor intake;
-    public CRServo box;
+    private DcMotor cascadeMotor;
+    private DcMotor clawAngleMotor;
+    private CRServo rightServo;
+    private CRServo leftServo;
 
     public IDriving driving;
+    public FullArm arm;
 
 
     public Robot(LinearOpMode opMode) {
@@ -37,17 +41,14 @@ public class Robot {
         lb.setDirection(DcMotorSimple.Direction.REVERSE);
         rf.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        //arm
+        cascadeMotor = map.tryGet(DcMotor.class, "cascade");
+        clawAngleMotor = map.tryGet(DcMotor.class, "clawAngle");
+        rightServo = map.tryGet(CRServo.class, "right");
+        leftServo = map.tryGet(CRServo.class, "left");
+
         driving = new StrafeDrive(rf, rb, lf, lb);
-
-        //cascade
-        cascade = map.tryGet(DcMotor.class, "cascade");
-
-        //intake
-        intake = map.tryGet(DcMotor.class, "intake");
-
-        //box
-        box = map.tryGet(CRServo.class, "box");
-
+        arm = new FullArm(cascadeMotor, clawAngleMotor, rightServo, leftServo);
     }
 
 }
