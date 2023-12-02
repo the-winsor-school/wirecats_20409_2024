@@ -47,9 +47,6 @@ public class Robot {
         rightServo = map.tryGet(CRServo.class, "right");
         leftServo = map.tryGet(CRServo.class, "left");
 
-        cascadeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        clawAngleMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
         driving = new StrafeDrive(rf, rb, lf, lb);
         arm = new FullArm(cascadeMotor, clawAngleMotor, rightServo, leftServo);
     }
