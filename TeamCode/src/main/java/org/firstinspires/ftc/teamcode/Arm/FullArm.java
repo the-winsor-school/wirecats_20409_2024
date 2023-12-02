@@ -11,7 +11,6 @@ public class FullArm {
     public Claw claw;
 
     public FullArm(DcMotor cascadeMotor, DcMotor clawAngleMotor, CRServo rightServo, CRServo leftServo) {
-        //TODO test for the powerUsed and armTolerance for these objects
         cascadeLift = new ArmJoint(cascadeMotor,0.75f, 100);
         clawAngleJoint = new ArmJoint(clawAngleMotor,0.25f, 20);
 

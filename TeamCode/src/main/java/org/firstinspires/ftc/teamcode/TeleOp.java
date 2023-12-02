@@ -54,10 +54,13 @@ public class TeleOp extends LinearOpMode {
             if (gamepad2.dpad_down)
                 robot.arm.cascadeLift.changeTargetPosition(-200);
             if (gamepad2.dpad_right)
-                robot.arm.clawAngleJoint.changeTargetPosition(25);
+                robot.arm.clawAngleJoint.usePower(true);
             if (gamepad2.dpad_left)
-                robot.arm.clawAngleJoint.changeTargetPosition(-25);
+                robot.arm.clawAngleJoint.usePower(false);
 
+            //stops motion of motor if button is not being pressed
+            if (!gamepad2.dpad_right && !gamepad2.dpad_left)
+                robot.arm.clawAngleJoint.brake();
 
             //claw controls
             if (gamepad2.right_bumper)
