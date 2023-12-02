@@ -1,25 +1,22 @@
 package org.firstinspires.ftc.teamcode;
-
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.driving.*;
+import org.firstinspires.ftc.teamcode.Arm.Claw;
 
-@Autonomous(name="test auto")
-public class SimpleAuton extends LinearOpMode {
+@Autonomous(name="red parking")
+public class SimpleAutonRed extends LinearOpMode {
 
     Robot robot;
 
     public void runOpMode() throws InterruptedException {
         robot = new Robot(this);
-
-        while (opModeIsActive()) {
-
+        waitForStart();
+        if (opModeIsActive()) {
             robot.driving.horizontal(1);
-
+            sleep(2000);
+            //robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
         }
-
     }
 }
