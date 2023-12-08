@@ -31,6 +31,7 @@ public class TeleOp extends LinearOpMode {
             float t = gamepad1.left_stick_x;
 
             robot.driving.joystickDrive(x, y, t);
+            robot.arm.brake();
 
             //make wheels go faster
             if (gamepad1.dpad_up)

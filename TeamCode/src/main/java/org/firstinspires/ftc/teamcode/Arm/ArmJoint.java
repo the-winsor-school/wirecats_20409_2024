@@ -66,7 +66,7 @@ public class ArmJoint {
 
     @Deprecated
     /**
-     * takes the thread and stops rest of progam whiles its executing
+     * takes the thread and stops rest of program whiles its executing
      */
     public void moveJointSync(int rotations) {
         targetPosition = rotations;

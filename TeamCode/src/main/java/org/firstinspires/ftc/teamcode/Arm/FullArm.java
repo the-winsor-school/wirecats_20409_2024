@@ -1,5 +1,4 @@
 package org.firstinspires.ftc.teamcode.Arm;
-
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -13,16 +12,21 @@ public class FullArm {
     public FullArm(DcMotor cascadeMotor, DcMotor clawAngleMotor, CRServo rightServo, CRServo leftServo) {
         cascadeLift = new ArmJoint(cascadeMotor,0.75f, 100);
         clawAngleJoint = new ArmJoint(clawAngleMotor,0.25f, 20);
-
         claw = new Claw (rightServo, leftServo);
     }
 
     /**
      * resets encoders for both joints
      */
+
+
     public void resetEncoders() {
         cascadeLift.resetEncoders();
         clawAngleJoint.resetEncoders();
+    }
+
+    public void brake () {
+        clawAngleJoint.brake();
     }
 
     @Deprecated
