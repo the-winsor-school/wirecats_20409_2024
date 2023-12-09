@@ -25,7 +25,6 @@ public class FullArm {
         clawAngleJoint.resetEncoders();
     }
 
-    @Deprecated
     public void moveArmToPosition(ArmPosition pos) {
         //TODO find rotations for each Arm position
         switch (pos) {
@@ -34,19 +33,19 @@ public class FullArm {
                 clawAngleJoint.setTargetPosition(0);
                 break;
 
-            case PLACINGLOW: //placing on board
-                cascadeLift.setTargetPosition(0);
+            case PICKINGUP: //picking up
+                cascadeLift.setTargetPosition(200);
                 clawAngleJoint.setTargetPosition(0);
                 break;
 
-            case PICKINGUP: //picking up
-                cascadeLift.setTargetPosition(0);
-                clawAngleJoint.setTargetPosition(0);
+            case PLACINGLOW: //placing on board
+                cascadeLift.setTargetPosition(1200);
+                clawAngleJoint.setTargetPosition(150);
                 break;
 
             case PLACINGHIGH:
-                cascadeLift.setTargetPosition(0);
-                clawAngleJoint.setTargetPosition(0);
+                cascadeLift.setTargetPosition(1700);
+                clawAngleJoint.setTargetPosition(150);
                 break;
         }
     }
