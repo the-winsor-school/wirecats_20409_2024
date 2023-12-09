@@ -46,9 +46,9 @@ public class TeleOp extends LinearOpMode {
 
             //arm manual controls
             if (gamepad2.dpad_up)
-                robot.arm.cascadeLift.changeTargetPosition(200);
-            if (gamepad2.dpad_down)
                 robot.arm.cascadeLift.changeTargetPosition(-200);
+            if (gamepad2.dpad_down)
+                robot.arm.cascadeLift.changeTargetPosition(200);
             if (gamepad2.dpad_right)
                 robot.arm.clawAngleJoint.changeTargetPosition(50);
             if (gamepad2.dpad_left)

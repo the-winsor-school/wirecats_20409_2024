@@ -34,18 +34,18 @@ public class FullArm {
                 break;
 
             case PICKINGUP: //picking up
-                cascadeLift.setTargetPosition(200);
+                cascadeLift.setTargetPosition(-200);
                 clawAngleJoint.setTargetPosition(0);
                 break;
 
             case PLACINGLOW: //placing on board
-                cascadeLift.setTargetPosition(1200);
-                clawAngleJoint.setTargetPosition(150);
+                cascadeLift.setTargetPosition(-1400);
+                clawAngleJoint.setTargetPosition(-150);
                 break;
 
             case PLACINGHIGH:
-                cascadeLift.setTargetPosition(1700);
-                clawAngleJoint.setTargetPosition(150);
+                cascadeLift.setTargetPosition(-1700);
+                clawAngleJoint.setTargetPosition(-150);
                 break;
         }
     }
