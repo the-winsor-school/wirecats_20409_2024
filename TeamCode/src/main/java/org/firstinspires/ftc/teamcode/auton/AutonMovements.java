@@ -40,9 +40,9 @@ public class AutonMovements {
             int horizontalDirection = 0; //will never be zero
 
             if (fieldPosition == FieldPosition.FAR_BLUE)
-                horizontalDirection = 1;
-            else if (fieldPosition == FieldPosition.FAR_RED)
                 horizontalDirection = -1;
+            else if (fieldPosition == FieldPosition.FAR_RED)
+                horizontalDirection = 1;
 
             robot.driving.horizontal(0.50f * horizontalDirection);
             telemetry.addLine(robot.printColorValues());
