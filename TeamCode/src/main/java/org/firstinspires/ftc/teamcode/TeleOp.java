@@ -63,12 +63,18 @@ public class TeleOp extends LinearOpMode {
             //arm encoder controls
             if (gamepad2.x)
                 robot.arm.resetEncoders();
-            if (gamepad2.y)
+            if (gamepad2.y) {
                 robot.arm.moveArmToPosition(FullArm.ArmPosition.RESET);
-            if (gamepad2.a)
+                robot.arm.cascadeLift.brake();
+            }
+            if (gamepad2.a) {
                 robot.arm.moveArmToPosition(FullArm.ArmPosition.PICKINGUP);
-            if (gamepad2.b)
+                robot.arm.cascadeLift.brake();
+            }
+            if (gamepad2.b) {
                 robot.arm.moveArmToPosition(FullArm.ArmPosition.PLACINGLOW);
+                robot.arm.cascadeLift.brake();
+            }
             //if (gamepad2.right_trigger)
                 //robot.arm.moveArmToPosition(FullArm.ArmPosition.PLACINGHIGH);
 
