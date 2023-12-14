@@ -34,18 +34,13 @@ public class FullArm {
                 break;
 
             case PICKINGUP: //picking up
-                cascadeLift.setTargetPosition(200);
-                claw.controlClaw(Claw.ClawPos.OPEN);
+                cascadeLift.setTargetPosition(-200);
+                clawAngleJoint.setTargetPosition(0);
                 break;
 
-            case PLACINGLOW:
-                cascadeLift.setTargetPosition(-1500);
-                clawAngleJoint.setTargetPosition(-150);
-                break;
-
-            case PLACINGHIGH: //placing on board
-                cascadeLift.setTargetPosition(-2400);
-                clawAngleJoint.setTargetPosition(-150);
+            case PLACING:
+                cascadeLift.setTargetPosition(-2650);
+                clawAngleJoint.setTargetPosition(-155);
                 break;
 
         }
@@ -53,8 +48,7 @@ public class FullArm {
 
     public enum ArmPosition {
         RESET,
-        PLACINGLOW,
         PICKINGUP,
-        PLACINGHIGH,
+        PLACING,
     }
 }

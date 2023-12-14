@@ -1,12 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Arm.Claw;
 import org.firstinspires.ftc.teamcode.Arm.FullArm;
-import org.firstinspires.ftc.teamcode.driving.*;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Simple")
 public class TeleOp extends LinearOpMode {
@@ -37,7 +34,7 @@ public class TeleOp extends LinearOpMode {
                 robot.driving.adjustSpeed(0.05f);
 
             //make wheels speed slower
-            if(gamepad1.dpad_down)
+            if (gamepad1.dpad_down)
                 robot.driving.adjustSpeed(-0.05f);
 
             //_______________________________________________
@@ -63,6 +60,7 @@ public class TeleOp extends LinearOpMode {
             //arm encoder controls
             if (gamepad2.x)
                 robot.arm.resetEncoders();
+
             if (gamepad2.y) {
                 robot.arm.moveArmToPosition(FullArm.ArmPosition.RESET);
                 robot.arm.cascadeLift.brake();
@@ -72,11 +70,18 @@ public class TeleOp extends LinearOpMode {
                 robot.arm.cascadeLift.brake();
             }
             if (gamepad2.b) {
-                robot.arm.moveArmToPosition(FullArm.ArmPosition.PLACINGLOW);
+                robot.arm.moveArmToPosition(FullArm.ArmPosition.PLACING);
                 robot.arm.cascadeLift.brake();
             }
-            //if (gamepad2.right_trigger)
-                //robot.arm.moveArmToPosition(FullArm.ArmPosition.PLACINGHIGH);
+
+            if (gamepad2.left_trigger > 0) {
+                robot.launcher.launchAirplane(Launcher.LaunchPos.OPEN);
+                robot.arm.cascadeLift.brake();
+            }
+
+            if (gamepad2.right_trigger > 0) {
+                robot.launcher.launchAirplane(Launcher.LaunchPos.CLOSE);
+            }
 
             robot.arm.cascadeLift.armLoop();
             robot.arm.clawAngleJoint.armLoop();
@@ -103,9 +108,9 @@ public class TeleOp extends LinearOpMode {
 
             telemetry.addLine("\n----------------CLAW-------------------------");
 
-            telemetry.addData("right servo: ", robot.arm.claw.getPower("right"));
-            telemetry.addData("left servo: ", robot.arm.claw.getPower("left"));
-
+            telemetry.addData("right servo: ", robot.arm.claw.getClawPower("right"));
+            telemetry.addData("left servo: ", robot.arm.claw.getClawPower("left"));
+            telemetry.addData("launch servo: ", robot.launcher.getLauncherPower());
             telemetry.update();
 
         }

@@ -34,7 +34,7 @@ public class Claw {
      * @param side either "right" or "left"
      * @return double of the current power
      */
-    public double getPower(String side) {
+    public double getClawPower(String side) {
         if (side == "right")
             return right.getPower();
         return left.getPower();

@@ -7,10 +7,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Arm.*;
-
-import org.firstinspires.ftc.teamcode.driving.GridDrive;
 import org.firstinspires.ftc.teamcode.driving.IDriving;
 import org.firstinspires.ftc.teamcode.driving.StrafeDrive;
+import org.firstinspires.ftc.teamcode.Launcher;
 
 public class Robot {
 
@@ -26,8 +25,12 @@ public class Robot {
     private CRServo rightServo;
     private CRServo leftServo;
 
+    private CRServo launchServo;
+
     public IDriving driving;
     public FullArm arm;
+
+    public Launcher launcher;
 
 
     public Robot(LinearOpMode opMode) {
@@ -46,9 +49,10 @@ public class Robot {
         clawAngleMotor = map.tryGet(DcMotor.class, "clawAngle");
         rightServo = map.tryGet(CRServo.class, "right");
         leftServo = map.tryGet(CRServo.class, "left");
-
+        launchServo = map.tryGet(CRServo.class, "launcher");
         driving = new StrafeDrive(rf, rb, lf, lb);
         arm = new FullArm(cascadeMotor, clawAngleMotor, rightServo, leftServo);
+        launcher = new Launcher(launchServo);
     }
 
 }
