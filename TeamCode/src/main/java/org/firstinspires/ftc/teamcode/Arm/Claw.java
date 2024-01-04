@@ -24,7 +24,7 @@ public class Claw {
 
             case CLOSE:
                 right.setPower(1.7);
-                left.setPower(-0.25);
+                left.setPower(0.1);
                 break;
         }
     }

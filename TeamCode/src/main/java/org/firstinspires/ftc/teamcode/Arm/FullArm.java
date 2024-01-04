@@ -12,7 +12,7 @@ public class FullArm {
 
     public FullArm(DcMotor cascadeMotor, DcMotor clawAngleMotor, CRServo rightServo, CRServo leftServo) {
         cascadeLift = new ArmJoint(cascadeMotor,0.75f, 100);
-        clawAngleJoint = new ArmJoint(clawAngleMotor,0.25f, 20);
+        clawAngleJoint = new ArmJoint(clawAngleMotor,0.5f, 20);
 
         claw = new Claw (rightServo, leftServo);
     }
@@ -39,8 +39,8 @@ public class FullArm {
                 break;
 
             case PLACING:
-                cascadeLift.setTargetPosition(-2650);
-                clawAngleJoint.setTargetPosition(-155);
+                cascadeLift.setTargetPosition(-3575);
+                clawAngleJoint.setTargetPosition(200);
                 break;
 
         }
