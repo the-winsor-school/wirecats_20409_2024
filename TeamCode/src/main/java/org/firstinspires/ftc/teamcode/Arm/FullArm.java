@@ -13,7 +13,6 @@ public class FullArm {
     public FullArm(DcMotor cascadeMotor, DcMotor clawAngleMotor, CRServo rightServo, CRServo leftServo) {
         cascadeLift = new ArmJoint(cascadeMotor,0.75f, 100);
         clawAngleJoint = new ArmJoint(clawAngleMotor,0.5f, 20);
-
         claw = new Claw (rightServo, leftServo);
     }
 
@@ -26,7 +25,6 @@ public class FullArm {
     }
 
     public void moveArmToPosition(ArmPosition pos) {
-        //TODO find rotations for each Arm position
         switch (pos) {
             case RESET: //init position
                 cascadeLift.setTargetPosition(0);
@@ -39,8 +37,8 @@ public class FullArm {
                 break;
 
             case PLACING:
-                cascadeLift.setTargetPosition(-3575);
-                clawAngleJoint.setTargetPosition(200);
+                cascadeLift.setTargetPosition(-4900);
+                clawAngleJoint.setTargetPosition(330);
                 break;
 
         }

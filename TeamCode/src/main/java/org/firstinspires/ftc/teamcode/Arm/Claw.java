@@ -18,13 +18,13 @@ public class Claw {
     public void controlClaw(ClawPos pos) {
         switch (pos) {
             case OPEN:
-                right.setPower(0.5);
-                left.setPower(0.5);
+                right.setPower(-0.5);
+                left.setPower(0.4);
                 break;
 
             case CLOSE:
-                right.setPower(1.7);
-                left.setPower(0.1);
+                right.setPower(0.7);
+                left.setPower(0);
                 break;
         }
     }
