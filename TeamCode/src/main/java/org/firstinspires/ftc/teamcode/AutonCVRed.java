@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Arm.Claw;
-import org.firstinspires.ftc.teamcode.Arm.FullArm;
 
 @Autonomous(name="auton CV: ONLY WORKS IN ZONE 2")
 public class AutonCVRed extends LinearOpMode {
@@ -17,15 +16,20 @@ public class AutonCVRed extends LinearOpMode {
         waitForStart();
         if (opModeIsActive()) {
             robot.driving.vertical(1);
-            sleep(600);
-            robot.arm.moveArmToPosition(FullArm.ArmPosition.PICKINGUP);
-            robot.arm.cascadeLift.brake();
-            robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
+            sleep(1150);
+            robot.driving.stop();
+            telemetry.addLine("\n----------------CLAW-------------------------");
+            telemetry.addData("right servo: ", robot.arm.claw.getClawPower("right"));
+            telemetry.addData("left servo: ", robot.arm.claw.getClawPower("left"));
+            telemetry.update();
             robot.driving.vertical(-1);
             sleep(600);
+            robot.driving.stop();
             robot.driving.horizontal(1);
-            sleep(2000);
+            sleep(1800);
+            robot.driving.stop();
             //robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
+
         }
     }
 }
