@@ -7,8 +7,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+/*
 import org.firstinspires.ftc.teamcode.libraries.AutonLibrary;
 import org.firstinspires.ftc.teamcode.libraries.DrivingLibrary;
+ */
 import org.opencv.core.Core;
 import org.opencv.core.Rect;
 import org.opencv.core.Mat;
@@ -20,11 +22,12 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
+/*
 import org.firstinspires.ftc.teamcode.libraries.AutonLibrary;
 import org.firstinspires.ftc.teamcode.libraries.DrivingLibrary;
 import org.firstinspires.ftc.teamcode.libraries.SimpleDriving;
 import org.firstinspires.ftc.teamcode.libraries.Robot;
-
+*/
 
 @Autonomous
 public class OpenCV extends LinearOpMode {
@@ -39,7 +42,9 @@ public class OpenCV extends LinearOpMode {
         //drivingLibrary.setSpeed(1);
         // drivingMode = 0;
         //drivingLibrary.setMode(drivingMode);
+        /*
         autonLibrary = new AutonLibrary(this);
+         */
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         pipeline = new SamplePipeline();
