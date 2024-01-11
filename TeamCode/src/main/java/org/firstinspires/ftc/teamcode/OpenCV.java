@@ -28,6 +28,7 @@ import org.firstinspires.ftc.teamcode.libraries.Robot;
 
 @Autonomous
 public class OpenCV extends LinearOpMode {
+    Robot robot;
     LinearOpMode opMode;
     OpenCvCamera webcam;
     SamplePipeline pipeline;
@@ -43,7 +44,9 @@ public class OpenCV extends LinearOpMode {
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         pipeline = new SamplePipeline();
         webcam.setPipeline(pipeline);
+        /*
         simpleDriving = new SimpleDriving(this);
+        */
         robot = new Robot(this);
 
 
@@ -87,22 +90,31 @@ public class OpenCV extends LinearOpMode {
 
             if (zone == SamplePipeline.TYPE.ZONE1){
                 //signalPark(1,Location.RedTop);
+                /*
                 autonLibrary.strafingSigmoid(0,-1,0,20, this, simpleDriving); //moves forward one square mat
                 sleep (50);
                 autonLibrary.strafingSigmoid(-1,0,0,850,this,simpleDriving); //moves left one square
                 sleep (300); //necessary?
+                 */
+                telemetry.addData("Zone", zone);
             }
             else if (zone == SamplePipeline.TYPE.ZONE2){
                 //signalPark(2,Location.RedTop);
+                /*
                 autonLibrary.strafingSigmoid(0,-1,0,15, this, simpleDriving); //moves forward one square mat
                 sleep (50);
+                 */
+                telemetry.addData("Zone", zone);
             }
             else if (zone == SamplePipeline.TYPE.ZONE3){
                 //signalPark(2,Location.RedTop);
+                /*
                 autonLibrary.strafingSigmoid(0,-1,0,5, this, simpleDriving); //moves forward one square mat
                 sleep (50);
                 autonLibrary.strafingSigmoid(1,0,0,700,this,simpleDriving); //moves right one square
                 sleep (500);
+                 */
+                telemetry.addData("Zone", zone);
             }
             /*autonLibrary.strafingSigmoid(1,0,0,2100, this, drivingLibrary); //strafes to the left for 2100 ms
             sleep (2100);*/
