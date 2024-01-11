@@ -1,5 +1,5 @@
+package org.firstinspires.ftc.teamcode;
 
-package org.firstinspires.ftc.teamcode.AprilTag;
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -14,6 +14,7 @@ import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.apriltag.AprilTagDetectorJNI;
 import org.openftc.apriltag.AprilTagPose;
 import org.openftc.easyopencv.OpenCvPipeline;
+
 import java.util.ArrayList;
 
 class AprilTagDetectionPipeline extends OpenCvPipeline
@@ -46,6 +47,14 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
     private boolean needToSetDecimation;
     private final Object decimationSync = new Object();
 
+    /***
+     * sets up the pipeline to detect April Tags
+     * @param tagsize how big is the tag
+     * @param fx
+     * @param fy
+     * @param cx
+     * @param cy
+     */
     public AprilTagDetectionPipeline(double tagsize, double fx, double fy, double cx, double cy)
     {
         this.tagsize = tagsize;
@@ -55,6 +64,7 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
         this.fy = fy;
         this.cx = cx;
         this.cy = cy;
+
         constructMatrix();
         nativeApriltagPtr = AprilTagDetectorJNI.createApriltagDetector(AprilTagDetectorJNI.TagFamily.TAG_36h11.string, 3, 3);
     }
@@ -73,10 +83,16 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
         }
     }
 
+    /***
+     * processes April Tag and detects individual tags
+     * @param input
+     * @return
+     */
     @Override
     public Mat processFrame(Mat input)
     {
         Imgproc.cvtColor(input, grey, Imgproc.COLOR_RGBA2GRAY);
+
         synchronized (decimationSync)
         {
             if(needToSetDecimation)
@@ -87,7 +103,6 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
         }
 
         detections = AprilTagDetectorJNI.runAprilTagDetectorSimple(nativeApriltagPtr, grey, tagsize, fx, fy, cx, cy);
-        System.out.println("found detections");
 
         synchronized (detectionsUpdateSync)
         {
@@ -99,7 +114,6 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
             Pose pose = aprilTagPoseToOpenCvPose(detection.pose);
             drawAxisMarker(input, tagsizeY/2.0, 6, pose.rvec, pose.tvec, cameraMatrix);
             draw3dCubeMarker(input, tagsizeX, tagsizeX, tagsizeY, 5, pose.rvec, pose.tvec, cameraMatrix);
-            System.out.println(detections);
         }
         return input;
     }
@@ -113,6 +127,10 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
         }
     }
 
+    /***
+     * gets latest tag detections
+     * @return an array of detections that can be used to create a TelemetryVector of tag positions
+     */
     public ArrayList<AprilTagDetection> getLatestDetections()
     {
         return detections;
@@ -165,6 +183,17 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
         Imgproc.circle(buf, projectedPoints[0], thickness, white, -1);
     }
 
+    /***
+     * draws markers on the tag for each tag
+     * @param buf
+     * @param length
+     * @param tagWidth
+     * @param tagHeight
+     * @param thickness
+     * @param rvec
+     * @param tvec
+     * @param cameraMatrix
+     */
     void draw3dCubeMarker(Mat buf, double length, double tagWidth, double tagHeight, int thickness, Mat rvec, Mat tvec, Mat cameraMatrix)
     {
         MatOfPoint3f axis = new MatOfPoint3f(

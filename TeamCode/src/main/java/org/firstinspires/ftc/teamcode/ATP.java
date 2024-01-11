@@ -1,7 +1,7 @@
-
-package org.firstinspires.ftc.teamcode.AprilTag;
-
+package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -10,56 +10,60 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.driving.IDriving;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-
 import java.util.ArrayList;
 
 public class ATP {
+    //Robot robot;
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
-    private static final double FEET_PER_METER = 3.28084;
 
-    // APRIL TAG CONSTANTS
+    OpenCV.SignalPipeline openCVPipeline;
+
+    OpenCV opencv;
+    Telemetry telemetry;
+
+    static final double FEET_PER_METER = 3.28084;
+
     // units in pixels
+    // might need to recalibrate for webcam resolution
     double fx = 578.272;
     double fy = 578.272;
     double cx = 402.145;
     double cy = 221.506;
+
     // UNITS ARE METERS
     double tagsize = 0.166;
 
-    ArrayList<AprilTagDetection> getCurrentDetections()
-    {
-        telemetry.addData("latest detections", aprilTagDetectionPipeline.getLatestDetections());
-        return aprilTagDetectionPipeline.getLatestDetections();
-    }
-    Telemetry telemetry;
-
     public ATP(LinearOpMode opMode) {
-        //robot = new Robot(opMode);
         HardwareMap map = opMode.hardwareMap;
-        telemetry = opMode.telemetry;
+        this.telemetry = opMode.telemetry;
+        opencv = new OpenCV();
+        //robot = new Robot(opMode);
         //setting pipeline
         int cameraMonitorViewId = map.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", map.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(map.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
         camera.setPipeline(aprilTagDetectionPipeline);
-        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+        openCVPipeline = new OpenCV.SignalPipeline();
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
+        {
             @Override
-            public void onOpened() {
-                camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
+            public void onOpened()
+            {
+                camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
-            public void onError(int errorCode) {
-                telemetry.addData("error", errorCode);
+            public void onError(int errorCode)
+            {
+
             }
         });
-
         camera.resumeViewport();
         opMode.telemetry.setMsTransmissionInterval(50);
     }
@@ -68,7 +72,6 @@ public class ATP {
      * This function identifies and prints the position of a detected tag on the Driver Hub. Distance and angle are calculated.
      * @param detection If an AprilTag is detected, it is called a detection.
      */
-
 
 
     public void getTagTelemetryData (AprilTagDetection detection) {
@@ -89,20 +92,24 @@ public class ATP {
 
 
     public TelemetryVector getVectorToTag (int id) {
-        ArrayList<AprilTagDetection> currentDetections = this.getCurrentDetections();
+        ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
+        aprilTagDetectionPipeline.getDetectionsUpdate();
         telemetry.addData("detections", currentDetections);
+        //telemetry.update();
         AprilTagDetection tagOfInterest = null;
         //boolean tagOfInterestFound = false;
         if (currentDetections.size() != 0) {
             for (AprilTagDetection tag : currentDetections) {
                 if (tag.id == id) {
+                    telemetry.addData("tag found! tag id: ", id);
+                    telemetry.update();
                     tagOfInterest = tag;
                     //tagOfInterestFound = true;
-                    break;
                 }
             }
             if (tagOfInterest == null) {
                 telemetry.addLine("can't find tag :(");
+                telemetry.update();
                 return null;
             }
 
@@ -110,11 +117,16 @@ public class ATP {
             getTagTelemetryData(tagOfInterest);
             telemetry.update();
             return findTagPosition(tagOfInterest);
-        }
 
-        telemetry.addLine("no tags here :(");
-        telemetry.update();
-        return null;
+        } else if (currentDetections.size() == 0) {
+            telemetry.addLine("no tags here :(");
+            telemetry.update();
+            return null;
+        } else {
+            telemetry.addLine("current detections = 0 but not null");
+            telemetry.update();
+            return null;
+        }
     }
 
     /***
@@ -171,4 +183,6 @@ public class ATP {
             this.yaw = yaw;
         }
     }
+
+
 }
