@@ -142,8 +142,14 @@ public class OpenCV extends LinearOpMode {
         private static final int GREEN1 = 20; // white < 140 < purple
 
         //CHANGE DIMENSIONS BASED ON POSITOIN FROM START OF AUTON
-        Point topLeft = new Point(100, 100);
-        Point bottomRight = new Point(125, 150);
+        Point topLeft = new Point(0, 0);
+        Point bottomRight = new Point(266, 448);
+
+        /*
+        Point topLeftZone1 = new Point(0, 0);
+        Point bottomRightZone1 = new Point(266, 448);
+        
+         */
 
         Mat region1_Cb;
         Mat region1_Cg;
