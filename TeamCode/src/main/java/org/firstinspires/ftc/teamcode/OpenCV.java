@@ -142,8 +142,14 @@ public class OpenCV extends LinearOpMode {
         private static final int GREEN1 = 20; // white < 140 < purple
 
         //CHANGE DIMENSIONS BASED ON POSITOIN FROM START OF AUTON
-        Point topLeft = new Point(40, 110);
-        Point bottomRight = new Point(80, 150);
+        Point topLeft1 = new Point(0, 110);
+        Point bottomRight1 = new Point(40, 150);
+
+        Point topLeft2 = new Point(135, 100);
+        Point bottomRight2 = new Point(175, 140);
+
+        Point topLeft3 = new Point(270, 95);
+        Point bottomRight3 = new Point(310, 135);
 
         /*
         Point topLeftZone1 = new Point(0, 0);
@@ -154,6 +160,14 @@ public class OpenCV extends LinearOpMode {
         Mat region1_Cb;
         Mat region1_Cg;
         Mat region1_Cr;
+
+        Mat region2_Cb;
+        Mat region2_Cg;
+        Mat region2_Cr;
+
+        Mat region3_Cb;
+        Mat region3_Cg;
+        Mat region3_Cr;
         //Mat YCrCb = new Mat();
         Mat Cb = new Mat();
         Mat Cg = new Mat();
@@ -175,10 +189,15 @@ public class OpenCV extends LinearOpMode {
         public void init(Mat input) {
             inputToCb(input);
 
-            region1_Cb = Cb.submat(new Rect(topLeft, bottomRight)); //setting region dimensions
-            region1_Cg = Cg.submat(new Rect(topLeft, bottomRight)); //setting region dimensions
-            region1_Cr = Cr.submat(new Rect(topLeft, bottomRight)); //setting region dimensions
-
+            region1_Cb = Cb.submat(new Rect(topLeft1, bottomRight1)); //setting region dimensions
+            region1_Cg = Cg.submat(new Rect(topLeft1, bottomRight1)); //setting region dimensions
+            region1_Cr = Cr.submat(new Rect(topLeft1, bottomRight1)); //setting region dimensions
+            region2_Cb = Cb.submat(new Rect(topLeft2, bottomRight2)); //setting region dimensions
+            region2_Cg = Cg.submat(new Rect(topLeft2, bottomRight2)); //setting region dimensions
+            region2_Cr = Cr.submat(new Rect(topLeft2, bottomRight2)); //setting region dimensions
+            region3_Cb = Cb.submat(new Rect(topLeft3, bottomRight3)); //setting region dimensions
+            region3_Cg = Cg.submat(new Rect(topLeft3, bottomRight3)); //setting region dimensions
+            region3_Cr = Cr.submat(new Rect(topLeft3, bottomRight3)); //setting region dimensions
         }
 
         @Override
@@ -189,7 +208,9 @@ public class OpenCV extends LinearOpMode {
             averageGreen = (int) Core.mean(region1_Cg).val[0]; // blue average values
             averageRed = (int) Core.mean(region1_Cr).val[0]; // green average values
 
-            Imgproc.rectangle(input, topLeft, bottomRight, BLUE, 2);
+            Imgproc.rectangle(input, topLeft1, bottomRight1, BLUE, 2);
+            Imgproc.rectangle(input, topLeft2, bottomRight2, BLUE, 2);
+            Imgproc.rectangle(input, topLeft3, bottomRight3, BLUE, 2);
 
             if (averageBlue < averageRed && averageGreen < averageRed) {
                 type = TYPE.ZONE1;
