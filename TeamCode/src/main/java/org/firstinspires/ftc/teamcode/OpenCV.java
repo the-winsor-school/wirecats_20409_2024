@@ -148,13 +148,13 @@ public class OpenCV extends LinearOpMode {
 
         //CHANGE DIMENSIONS BASED ON POSITOIN FROM START OF AUTON
         Point topLeft1 = new Point(0, 110);
-        Point bottomRight1 = new Point(40, 150);
+        Point bottomRight1 = new Point(60, 150);
 
-        Point topLeft2 = new Point(135, 100);
-        Point bottomRight2 = new Point(175, 140);
+        Point topLeft2 = new Point(130, 100);
+        Point bottomRight2 = new Point(180, 140);
 
-        Point topLeft3 = new Point(270, 95);
-        Point bottomRight3 = new Point(310, 135);
+        Point topLeft3 = new Point(260, 95);
+        Point bottomRight3 = new Point(320, 145);
 
         /*
         Point topLeftZone1 = new Point(0, 0);
