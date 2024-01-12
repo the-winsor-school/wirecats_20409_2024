@@ -3,8 +3,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 /*
@@ -20,7 +18,6 @@ import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 /*
 import org.firstinspires.ftc.teamcode.libraries.AutonLibrary;
@@ -85,11 +82,19 @@ public class OpenCV extends LinearOpMode {
             telemetry.update();
             sleep(3000);
             SamplePipeline.TYPE zone = pipeline.getType();
-            int[] averages = pipeline.getAverage();
+            int[] averages1 = pipeline.getAverage1();
+            int[] averages2 = pipeline.getAverage2();
+            int[] averages3 = pipeline.getAverage3();
             telemetry.addData("Type", zone);
-            telemetry.addData("Average Red", averages[0]);
-            telemetry.addData("Average Green", averages[1]);
-            telemetry.addData("Average Blue", averages[2]);
+            telemetry.addData("Average Red 1", averages1[0]);
+            telemetry.addData("Average Green 1", averages1[1]);
+            telemetry.addData("Average Blue 1", averages1[2]);
+            telemetry.addData("Average Red 2", averages2[0]);
+            telemetry.addData("Average Green 2", averages2[1]);
+            telemetry.addData("Average Blue 2", averages2[2]);
+            telemetry.addData("Average Red 3", averages3[0]);
+            telemetry.addData("Average Green 3", averages3[1]);
+            telemetry.addData("Average Blue 3", averages3[2]);
             sleep(3000);
             telemetry.update();
 
@@ -173,9 +178,17 @@ public class OpenCV extends LinearOpMode {
         Mat Cg = new Mat();
         Mat Cr = new Mat();
 
-        private volatile int averageRed;
-        private volatile int averageBlue;
-        private volatile int averageGreen;
+        private volatile int averageRed1;
+        private volatile int averageBlue1;
+        private volatile int averageGreen1;
+
+        private volatile int averageRed2;
+        private volatile int averageBlue2;
+        private volatile int averageGreen2;
+
+        private volatile int averageRed3;
+        private volatile int averageBlue3;
+        private volatile int averageGreen3;
         private volatile TYPE type = TYPE.ZONE2; //default value
 
         private void inputToCb(Mat input) {
@@ -204,22 +217,36 @@ public class OpenCV extends LinearOpMode {
         public Mat processFrame(Mat input) {
             inputToCb(input);
 
-            averageBlue = (int) Core.mean(region1_Cb).val[0]; // red average values
-            averageGreen = (int) Core.mean(region1_Cg).val[0]; // blue average values
-            averageRed = (int) Core.mean(region1_Cr).val[0]; // green average values
-
+            averageBlue1 = (int) Core.mean(region1_Cb).val[0]; // red average values
+            averageGreen1 = (int) Core.mean(region1_Cg).val[0]; // blue average values
+            averageRed1 = (int) Core.mean(region1_Cr).val[0]; // green average values
+            averageBlue2 = (int) Core.mean(region2_Cb).val[0]; // red average values
+            averageGreen2 = (int) Core.mean(region2_Cg).val[0]; // blue average values
+            averageRed2 = (int) Core.mean(region2_Cr).val[0]; // green average values
+            averageBlue3 = (int) Core.mean(region3_Cb).val[0]; // red average values
+            averageGreen3 = (int) Core.mean(region3_Cg).val[0]; // blue average values
+            averageRed3 = (int) Core.mean(region3_Cr).val[0]; // green average values
             Imgproc.rectangle(input, topLeft1, bottomRight1, BLUE, 2);
             Imgproc.rectangle(input, topLeft2, bottomRight2, BLUE, 2);
             Imgproc.rectangle(input, topLeft3, bottomRight3, BLUE, 2);
 
-            if (averageBlue < averageRed && averageGreen < averageRed) {
+            if (averageRed1 < averageBlue1 && averageGreen1 < averageBlue1 && averageBlue1 > averageBlue2 && averageBlue1 < averageBlue3) {
                 type = TYPE.ZONE1;
             }
-            else if (averageBlue < averageGreen && averageRed < averageGreen) {
+            else if (averageRed2 < averageBlue2 && averageGreen2 < averageBlue2 && averageBlue2 < averageBlue1 && averageBlue2 < averageBlue3) {
                 type = TYPE.ZONE2;
             }
-            else if (averageGreen < averageBlue && averageRed < averageBlue) {
+            else if (averageRed3 < averageBlue3 && averageGreen3 < averageBlue3 && averageBlue1 > averageBlue3 && averageBlue2 > averageBlue3) {
                 type = TYPE.ZONE3;
+            }
+            else if (averageBlue1 < averageRed1 && averageGreen1 < averageRed1) {
+                type = TYPE.ZONE4;
+            }
+            else if (averageBlue2 < averageRed2 && averageGreen2 < averageRed2) {
+                type = TYPE.ZONE5;
+            }
+            else if (averageBlue3 < averageRed3 && averageGreen3 < averageRed3) {
+                type = TYPE.ZONE6;
             }
             else {
                 type = null;
@@ -232,22 +259,25 @@ public class OpenCV extends LinearOpMode {
             return type;
         }
 
-        public int[] getAverage () {
-            int[] averages = {averageRed, averageGreen, averageBlue};
-            return averages;
+        public int[] getAverage1() {
+            int[] averages1 = {averageRed1, averageGreen1, averageBlue1};
+            return averages1;
+        }
+        public int[] getAverage2() {
+            int[] averages2 = {averageRed2, averageGreen2, averageBlue2};
+            return averages2;
+        }
+        public int[] getAverage3() {
+            int[] averages3 = {averageRed3, averageGreen3, averageBlue3};
+            return averages3;
         }
 
         public enum TYPE {
-            ZONE1, ZONE2, ZONE3
+            //zone 1-3 = blue
+            //zone 4-6 = red
+            ZONE1, ZONE2, ZONE3, ZONE4, ZONE5, ZONE6
         }
     }
-    public enum Location {
-        BlueTop,
-        BlueBottom,
-        RedTop,
-        RedBottom
-    }
-
     /*
     public void signalPark(int signal, Location location) {
         float direction = 0;
