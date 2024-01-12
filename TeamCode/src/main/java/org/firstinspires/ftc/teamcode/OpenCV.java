@@ -230,7 +230,7 @@ public class OpenCV extends LinearOpMode {
             Imgproc.rectangle(input, topLeft2, bottomRight2, BLUE, 2);
             Imgproc.rectangle(input, topLeft3, bottomRight3, BLUE, 2);
 
-            if (averageRed1 < averageBlue1 && averageGreen1 < averageBlue1 && averageBlue1 > averageBlue2 && averageBlue1 < averageBlue3) {
+            if (averageRed1 < averageBlue1 && averageGreen1 < averageBlue1 && averageBlue1 < averageBlue2 && averageBlue1 < averageBlue3) {
                 type = TYPE.ZONE1;
             }
             else if (averageRed2 < averageBlue2 && averageGreen2 < averageBlue2 && averageBlue2 < averageBlue1 && averageBlue2 < averageBlue3) {
