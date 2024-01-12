@@ -9,6 +9,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.libraries.AutonLibrary;
 import org.firstinspires.ftc.teamcode.libraries.DrivingLibrary;
  */
+import org.firstinspires.ftc.teamcode.Arm.Claw;
 import org.opencv.core.Core;
 import org.opencv.core.Rect;
 import org.opencv.core.Mat;
@@ -99,6 +100,15 @@ public class OpenCV extends LinearOpMode {
             telemetry.update();
 
             if (zone == SamplePipeline.TYPE.ZONE1){
+                telemetry.addLine("Zone 1");
+                robot.driving.horizontal(-0.75f);
+                sleep(300);
+                robot.driving.stop();
+                robot.driving.vertical(0.75f);
+                sleep(50);
+                robot.driving.stop();
+                robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
+                sleep(200);
                 //signalPark(1,Location.RedTop);
                 /*
                 autonLibrary.strafingSigmoid(0,-1,0,20, this, simpleDriving); //moves forward one square mat
@@ -106,7 +116,6 @@ public class OpenCV extends LinearOpMode {
                 autonLibrary.strafingSigmoid(-1,0,0,850,this,simpleDriving); //moves left one square
                 sleep (300); //necessary?
                  */
-                telemetry.addData("Zone", zone);
             }
             else if (zone == SamplePipeline.TYPE.ZONE2){
                 //signalPark(2,Location.RedTop);
