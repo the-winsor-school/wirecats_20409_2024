@@ -101,10 +101,10 @@ public class OpenCV extends LinearOpMode {
 
             if (zone == SamplePipeline.TYPE.ZONE1){
                 telemetry.addLine("Zone 1");
-                robot.driving.horizontal(-0.75f);
+                robot.driving.horizontal(-0.4f);
                 sleep(300);
                 robot.driving.stop();
-                robot.driving.vertical(0.75f);
+                robot.driving.vertical(0.4f);
                 sleep(50);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
