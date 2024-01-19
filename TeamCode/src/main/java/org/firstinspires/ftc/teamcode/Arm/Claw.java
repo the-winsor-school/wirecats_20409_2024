@@ -27,6 +27,11 @@ public class Claw {
                 right.setPower(1.7);
                 left.setPower(-0.25);
                 break;
+
+            case STOP:
+                right.setPower(0);
+                left.setPower(0);
+                break;
         }
     }
 
@@ -47,6 +52,7 @@ public class Claw {
     public enum ClawPos {
         OPEN,
         CLOSE,
+        STOP
     }
 }
 
