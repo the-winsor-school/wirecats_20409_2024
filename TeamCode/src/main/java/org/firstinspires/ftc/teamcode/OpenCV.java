@@ -99,23 +99,20 @@ public class OpenCV extends LinearOpMode {
             sleep(3000);
             telemetry.update();
 
-            if (zone == SamplePipeline.TYPE.ZONE1){
+            if (zone == SamplePipeline.TYPE.ZONE1)
+            {
                 telemetry.addLine("Zone 1");
                 robot.driving.horizontal(-0.4f);
+                telemetry.addLine("driving horizontally");
                 sleep(300);
                 robot.driving.stop();
                 robot.driving.vertical(0.4f);
+                telemetry.addLine("driving vertically");
                 sleep(50);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
                 sleep(200);
-                //signalPark(1,Location.RedTop);
-                /*
-                autonLibrary.strafingSigmoid(0,-1,0,20, this, simpleDriving); //moves forward one square mat
-                sleep (50);
-                autonLibrary.strafingSigmoid(-1,0,0,850,this,simpleDriving); //moves left one square
-                sleep (300); //necessary?
-                 */
+                
             }
             else if (zone == SamplePipeline.TYPE.ZONE2){
                 //signalPark(2,Location.RedTop);
@@ -124,6 +121,9 @@ public class OpenCV extends LinearOpMode {
                 sleep (50);
                  */
                 telemetry.addData("Zone", zone);
+                robot.driving.vertical(0.4f);
+                sleep(400);
+                robot.driving.stop();
             }
             else if (zone == SamplePipeline.TYPE.ZONE3){
                 //signalPark(2,Location.RedTop);
