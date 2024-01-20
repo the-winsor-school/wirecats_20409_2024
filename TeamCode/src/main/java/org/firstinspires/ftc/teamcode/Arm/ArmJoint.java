@@ -19,6 +19,11 @@ public class ArmJoint {
     DcMotor motor;
 
     /**
+     * set the brake behaviour for the brake method
+     */
+    DcMotor.ZeroPowerBehavior stopBehaviour;
+
+    /**
      * tolerance used for this joint
      * (which is how accurate it will try to get to the exact target position)
      */
@@ -30,6 +35,11 @@ public class ArmJoint {
         this.motor = motor;
         this.powerUsed = powerUsed;
         this.armTolerance = armTolerance;
+        stopBehaviour = DcMotor.ZeroPowerBehavior.BRAKE;
+    }
+
+    public void setStopBehaviour(DcMotor.ZeroPowerBehavior newBehaviour) {
+        stopBehaviour = newBehaviour;
     }
 
     /**
@@ -118,7 +128,7 @@ public class ArmJoint {
     /**
      * stops the joint with brake stop
      */
-    public void brake() { motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); }
+    public void brake() { motor.setZeroPowerBehavior(stopBehaviour); }
 
     /**
      *

@@ -12,7 +12,8 @@ public class FullArm {
 
     public FullArm(DcMotor cascadeMotor, DcMotor clawAngleMotor, CRServo rightServo, CRServo leftServo) {
         cascadeLift = new ArmJoint(cascadeMotor,1f, 100);
-        clawAngleJoint = new ArmJoint(clawAngleMotor,0.5f, 20);
+        clawAngleJoint = new ArmJoint(clawAngleMotor,0.5f, 5);
+        clawAngleJoint.setStopBehaviour(DcMotor.ZeroPowerBehavior.FLOAT);
         claw = new Claw (rightServo, leftServo);
     }
 
