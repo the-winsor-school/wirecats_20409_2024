@@ -99,33 +99,37 @@ public class OpenCV extends LinearOpMode {
             sleep(3000);
             telemetry.update();
 
-            if (zone == SamplePipeline.TYPE.ZONE1)
+            if (zone == SamplePipeline.TYPE.ZONE1 || zone == SamplePipeline.TYPE.ZONE4)
             {
                 telemetry.addLine("Zone 1");
-                robot.driving.horizontal(-0.4f);
-                telemetry.addLine("driving horizontally");
-                sleep(300);
-                robot.driving.stop();
-                robot.driving.vertical(0.4f);
+                robot.driving.vertical(0.75f);
                 telemetry.addLine("driving vertically");
-                sleep(50);
+                sleep(1200);
+                robot.driving.stop();
+                robot.driving.horizontal(-1);
+                telemetry.addLine("driving horizontally");
+                sleep(600);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(200);
-                
+                sleep(300);
+                //robot.arm.claw.controlClaw(Claw.ClawPos.STOP);
+                //sleep(200);
             }
-            else if (zone == SamplePipeline.TYPE.ZONE2){
+            else if (zone == SamplePipeline.TYPE.ZONE2 || zone == SamplePipeline.TYPE.ZONE5){
                 //signalPark(2,Location.RedTop);
                 /*
                 autonLibrary.strafingSigmoid(0,-1,0,15, this, simpleDriving); //moves forward one square mat
                 sleep (50);
                  */
-                telemetry.addData("Zone", zone);
-                robot.driving.vertical(0.4f);
-                sleep(400);
+                telemetry.addLine("Zone 2");
+                robot.driving.vertical(1);
+                telemetry.addLine("driving vertically");
+                sleep(865);
                 robot.driving.stop();
+                robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
+                sleep(300);
             }
-            else if (zone == SamplePipeline.TYPE.ZONE3){
+            else if (zone == SamplePipeline.TYPE.ZONE3 || zone == SamplePipeline.TYPE.ZONE6){
                 //signalPark(2,Location.RedTop);
                 /*
                 autonLibrary.strafingSigmoid(0,-1,0,5, this, simpleDriving); //moves forward one square mat
@@ -133,7 +137,17 @@ public class OpenCV extends LinearOpMode {
                 autonLibrary.strafingSigmoid(1,0,0,700,this,simpleDriving); //moves right one square
                 sleep (500);
                  */
-                telemetry.addData("Zone", zone);
+                telemetry.addLine("Zone 3");
+                robot.driving.vertical(0.75f);
+                telemetry.addLine("driving vertically");
+                sleep(1200);
+                robot.driving.stop();
+                robot.driving.horizontal(0.75f);
+                telemetry.addLine("driving horizontally");
+                sleep(700);
+                robot.driving.stop();
+                robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
+                sleep(300);
             }
             /*autonLibrary.strafingSigmoid(1,0,0,2100, this, drivingLibrary); //strafes to the left for 2100 ms
             sleep (2100);*/
@@ -248,13 +262,13 @@ public class OpenCV extends LinearOpMode {
             else if (averageRed3 < averageBlue3 && averageGreen3 < averageBlue3 && averageBlue1 > averageBlue3 && averageBlue2 > averageBlue3) {
                 type = TYPE.ZONE3;
             }
-            else if (averageBlue1 < averageRed1 && averageGreen1 < averageRed1) {
+            else if (averageBlue1 < averageRed1 && averageGreen1 < averageRed1 && averageRed1 < averageRed2 && averageRed1 > averageRed3) {
                 type = TYPE.ZONE4;
             }
-            else if (averageBlue2 < averageRed2 && averageGreen2 < averageRed2) {
+            else if (averageBlue2 < averageRed2 && averageGreen2 < averageRed2 && averageRed2 < averageRed1 && averageRed2 > averageRed3) {
                 type = TYPE.ZONE5;
             }
-            else if (averageBlue3 < averageRed3 && averageGreen3 < averageRed3) {
+            else if (averageBlue3 < averageRed3 && averageGreen3 < averageRed3 && averageRed1 > averageRed3 && averageRed2 > averageRed3) {
                 type = TYPE.ZONE6;
             }
             else {
