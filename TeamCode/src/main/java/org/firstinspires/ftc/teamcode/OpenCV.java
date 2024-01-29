@@ -108,7 +108,7 @@ public class OpenCV extends LinearOpMode {
                 robot.driving.stop();
                 robot.driving.horizontal(-1);
                 telemetry.addLine("driving horizontally");
-                sleep(600);
+                sleep(500);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
                 sleep(300);
@@ -124,7 +124,7 @@ public class OpenCV extends LinearOpMode {
                 telemetry.addLine("Zone 2");
                 robot.driving.vertical(1);
                 telemetry.addLine("driving vertically");
-                sleep(865);
+                sleep(900);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
                 sleep(300);
@@ -144,7 +144,7 @@ public class OpenCV extends LinearOpMode {
                 robot.driving.stop();
                 robot.driving.horizontal(0.75f);
                 telemetry.addLine("driving horizontally");
-                sleep(700);
+                sleep(860);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
                 sleep(300);
@@ -253,7 +253,7 @@ public class OpenCV extends LinearOpMode {
             Imgproc.rectangle(input, topLeft2, bottomRight2, BLUE, 2);
             Imgproc.rectangle(input, topLeft3, bottomRight3, BLUE, 2);
 
-            if (averageRed1 < averageBlue1 && averageGreen1 < averageBlue1 && averageBlue1 < averageBlue2 && averageBlue1 < averageBlue3) {
+            if (averageRed1 < averageBlue1 && averageGreen1 < averageBlue1 && averageBlue1 < averageBlue2 && averageBlue1 <= averageBlue3) {
                 type = TYPE.ZONE1;
             }
             else if (averageRed2 < averageBlue2 && averageGreen2 < averageBlue2 && averageBlue2 < averageBlue1 && averageBlue2 < averageBlue3) {
@@ -262,13 +262,13 @@ public class OpenCV extends LinearOpMode {
             else if (averageRed3 < averageBlue3 && averageGreen3 < averageBlue3 && averageBlue1 > averageBlue3 && averageBlue2 > averageBlue3) {
                 type = TYPE.ZONE3;
             }
-            else if (averageBlue1 < averageRed1 && averageGreen1 < averageRed1 && averageRed1 < averageRed2 && averageRed1 > averageRed3) {
+            else if (averageBlue1 < averageRed1 && averageGreen1 < averageRed1 && averageRed1 < averageRed2 && averageRed1 < averageRed3) {
                 type = TYPE.ZONE4;
             }
-            else if (averageBlue2 < averageRed2 && averageGreen2 < averageRed2 && averageRed2 < averageRed1 && averageRed2 > averageRed3) {
+            else if (averageBlue2 < averageRed2 && averageGreen2 < averageRed2 && averageRed1 > averageRed2  && averageRed2 < averageRed3) {
                 type = TYPE.ZONE5;
             }
-            else if (averageBlue3 < averageRed3 && averageGreen3 < averageRed3 && averageRed1 > averageRed3 && averageRed2 > averageRed3) {
+            else if (averageBlue3 < averageRed3 && averageGreen3 < averageRed3 && averageRed1 > averageRed3 && averageRed2 > averageRed3 && averageRed1 > averageRed2) {
                 type = TYPE.ZONE6;
             }
             else {
