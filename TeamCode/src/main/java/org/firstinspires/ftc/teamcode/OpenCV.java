@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.libraries.AutonLibrary;
 import org.firstinspires.ftc.teamcode.libraries.DrivingLibrary;
  */
 import org.firstinspires.ftc.teamcode.Arm.Claw;
+import org.firstinspires.ftc.teamcode.Arm.FullArm;
 import org.opencv.core.Core;
 import org.opencv.core.Rect;
 import org.opencv.core.Mat;
@@ -112,9 +113,12 @@ public class OpenCV extends LinearOpMode {
                 sleep(500);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
+                sleep(1000);
+                robot.driving.stop();
                 
                 //parking part
+                robot.driving.vertical(-0.75f);
+                sleep(300);
                 robot.driving.horizontal(-1);
                 telemetry.addLine("driving horizontally");
                 sleep(1500);
@@ -132,12 +136,15 @@ public class OpenCV extends LinearOpMode {
                 telemetry.addLine("Zone 2");
                 robot.driving.vertical(1);
                 telemetry.addLine("driving vertically");
-                sleep(900);
+                sleep(1100);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
+                sleep(1000);
+                robot.driving.stop();
                 
                 //parking part
+                robot.driving.vertical(-0.75f);
+                sleep(300);
                 robot.driving.horizontal(-1);
                 telemetry.addLine("driving horizontally");
                 sleep(1700);
@@ -155,19 +162,22 @@ public class OpenCV extends LinearOpMode {
                 telemetry.addLine("Zone 3");
                 robot.driving.vertical(0.75f);
                 telemetry.addLine("driving vertically");
-                sleep(1200);
+                sleep(1400);
                 robot.driving.stop();
                 robot.driving.horizontal(0.75f);
                 telemetry.addLine("driving horizontally");
-                sleep(860);
+                sleep(900);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
+                sleep(1000);
+                robot.driving.stop();
                 
                 //parking part
+                robot.driving.vertical(-0.75f);
+                sleep(125);
                 robot.driving.horizontal(-1);
                 telemetry.addLine("driving horizontally");
-                sleep(2000);
+                sleep(2300);
                 robot.driving.stop();
             }
             else if (zone == SamplePipeline.TYPE.ZONE4)
@@ -176,11 +186,11 @@ public class OpenCV extends LinearOpMode {
                 telemetry.addLine("Zone 4");
                 robot.driving.vertical(0.75f);
                 telemetry.addLine("driving vertically");
-                sleep(1200);
+                sleep(1325);
                 robot.driving.stop();
                 robot.driving.horizontal(-1);
                 telemetry.addLine("driving horizontally");
-                sleep(500);
+                sleep(575);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
                 sleep(1000);
@@ -189,11 +199,11 @@ public class OpenCV extends LinearOpMode {
                 //parking part
                 robot.driving.vertical(-0.75f);
                 telemetry.addLine("driving vertically");
-                sleep(200);
-                robot.driving.stop();
+                sleep(125);
                 robot.driving.horizontal(1);
                 telemetry.addLine("driving horizontally");
-                sleep(2000);
+                sleep(2300);
+                robot.driving.stop();
                 //robot.arm.claw.controlClaw(Claw.ClawPos.STOP);
                 //sleep(200);
             }
@@ -238,7 +248,7 @@ public class OpenCV extends LinearOpMode {
                 robot.driving.stop();
                 robot.driving.horizontal(0.75f);
                 telemetry.addLine("driving horizontally");
-                sleep(860);
+                sleep(825);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
                 sleep(1000);

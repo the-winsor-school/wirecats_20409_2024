@@ -105,22 +105,15 @@ public class OpenCVNoParking extends LinearOpMode {
                 telemetry.addLine("Zone 1");
                 robot.driving.vertical(0.75f);
                 telemetry.addLine("driving vertically");
-                sleep(1200);
+                sleep(1325);
                 robot.driving.stop();
                 robot.driving.horizontal(-1);
                 telemetry.addLine("driving horizontally");
                 sleep(500);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
-
-                //parking part
-                robot.driving.horizontal(-1);
-                telemetry.addLine("driving horizontally");
-                sleep(1500);
+                sleep(1000);
                 robot.driving.stop();
-                //robot.arm.claw.controlClaw(Claw.ClawPos.STOP);
-                //sleep(200);
             }
             else if (zone == SamplePipeline.TYPE.ZONE2){
                 //signalPark(2,Location.RedTop);
@@ -132,15 +125,10 @@ public class OpenCVNoParking extends LinearOpMode {
                 telemetry.addLine("Zone 2");
                 robot.driving.vertical(1);
                 telemetry.addLine("driving vertically");
-                sleep(900);
+                sleep(1000);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
-
-                //parking part
-                robot.driving.horizontal(-1);
-                telemetry.addLine("driving horizontally");
-                sleep(1700);
+                sleep(1000);
                 robot.driving.stop();
             }
             else if (zone == SamplePipeline.TYPE.ZONE3){
@@ -162,12 +150,7 @@ public class OpenCVNoParking extends LinearOpMode {
                 sleep(860);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
-
-                //parking part
-                robot.driving.horizontal(-1);
-                telemetry.addLine("driving horizontally");
-                sleep(2000);
+                sleep(1000);
                 robot.driving.stop();
             }
             else if (zone == SamplePipeline.TYPE.ZONE4)
@@ -176,25 +159,15 @@ public class OpenCVNoParking extends LinearOpMode {
                 telemetry.addLine("Zone 4");
                 robot.driving.vertical(0.75f);
                 telemetry.addLine("driving vertically");
-                sleep(1200);
+                sleep(1325);
                 robot.driving.stop();
                 robot.driving.horizontal(-1);
                 telemetry.addLine("driving horizontally");
-                sleep(500);
+                sleep(575);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
+                sleep(1000);
                 robot.driving.stop();
-                //parking part
-                robot.driving.vertical(-0.75f);
-                telemetry.addLine("driving vertically");
-                sleep(200);
-                robot.driving.stop();
-                robot.driving.horizontal(1);
-                telemetry.addLine("driving horizontally");
-                sleep(2000);
-                //robot.arm.claw.controlClaw(Claw.ClawPos.STOP);
-                //sleep(200);
             }
             else if (zone == SamplePipeline.TYPE.ZONE5){
                 //signalPark(2,Location.RedTop);
@@ -206,15 +179,10 @@ public class OpenCVNoParking extends LinearOpMode {
                 telemetry.addLine("Zone 5");
                 robot.driving.vertical(1);
                 telemetry.addLine("driving vertically");
-                sleep(900);
+                sleep(1050);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
-
-                //parking part
-                robot.driving.horizontal(1);
-                telemetry.addLine("driving horizontally");
-                sleep(1700);
+                sleep(1000);
                 robot.driving.stop();
             }
             else if (zone == SamplePipeline.TYPE.ZONE6){
@@ -229,14 +197,15 @@ public class OpenCVNoParking extends LinearOpMode {
                 telemetry.addLine("Zone 6");
                 robot.driving.vertical(0.75f);
                 telemetry.addLine("driving vertically");
-                sleep(1200);
+                sleep(1325);
                 robot.driving.stop();
-                robot.driving.horizontal(0.75f);
+                robot.driving.horizontal(1);
                 telemetry.addLine("driving horizontally");
-                sleep(860);
+                sleep(650);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
+                sleep(1000);
+                robot.driving.stop();
 
                 //parking part
                 /*
