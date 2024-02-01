@@ -11,9 +11,9 @@ public class FullArm {
     public Claw claw;
 
     public FullArm(DcMotor cascadeMotor, DcMotor clawAngleMotor, CRServo rightServo, CRServo leftServo) {
-        cascadeLift = new ArmJoint(cascadeMotor,0.75f, 100);
-        clawAngleJoint = new ArmJoint(clawAngleMotor,0.25f, 20);
-
+        cascadeLift = new ArmJoint(cascadeMotor,1f, 100);
+        clawAngleJoint = new ArmJoint(clawAngleMotor,0.5f, 5);
+        clawAngleJoint.setStopBehaviour(DcMotor.ZeroPowerBehavior.FLOAT);
         claw = new Claw (rightServo, leftServo);
     }
 
@@ -25,36 +25,29 @@ public class FullArm {
         clawAngleJoint.resetEncoders();
     }
 
-    @Deprecated
     public void moveArmToPosition(ArmPosition pos) {
-        //TODO find rotations for each Arm position
         switch (pos) {
             case RESET: //init position
                 cascadeLift.setTargetPosition(0);
                 clawAngleJoint.setTargetPosition(0);
                 break;
 
-            case PLACINGLOW: //placing on board
-                cascadeLift.setTargetPosition(0);
-                clawAngleJoint.setTargetPosition(0);
-                break;
-
             case PICKINGUP: //picking up
-                cascadeLift.setTargetPosition(0);
+                cascadeLift.setTargetPosition(-300);
                 clawAngleJoint.setTargetPosition(0);
                 break;
 
-            case PLACINGHIGH:
-                cascadeLift.setTargetPosition(0);
-                clawAngleJoint.setTargetPosition(0);
+            case PLACING:
+                cascadeLift.setTargetPosition(-4900);
+                clawAngleJoint.setTargetPosition(330);
                 break;
+
         }
     }
 
     public enum ArmPosition {
         RESET,
-        PLACINGLOW,
         PICKINGUP,
-        PLACINGHIGH,
+        PLACING,
     }
 }

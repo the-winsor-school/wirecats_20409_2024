@@ -18,7 +18,6 @@ public class StrafeDrive implements IDriving {
         this.lf = lf;
         this.lb =lb;
 
-        //TODO find the rigth reverses for 20409 this year
         //this.rf.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 

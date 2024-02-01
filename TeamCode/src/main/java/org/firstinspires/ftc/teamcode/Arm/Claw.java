@@ -17,15 +17,14 @@ public class Claw {
      */
     public void controlClaw(ClawPos pos) {
         switch (pos) {
-            //TODO test for close values
             case OPEN:
-                right.setPower(0.5);
-                left.setPower(0.5);
+                right.setPower(-0.01);
+                left.setPower(0.4);
                 break;
 
             case CLOSE:
-                right.setPower(1.7);
-                left.setPower(-0.25);
+                right.setPower(0.7);
+                left.setPower(0);
                 break;
 
             case STOP:
@@ -40,7 +39,7 @@ public class Claw {
      * @param side either "right" or "left"
      * @return double of the current power
      */
-    public double getPower(String side) {
+    public double getClawPower(String side) {
         if (side == "right")
             return right.getPower();
         return left.getPower();
