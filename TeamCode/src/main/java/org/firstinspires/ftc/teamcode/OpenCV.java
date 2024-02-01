@@ -99,8 +99,9 @@ public class OpenCV extends LinearOpMode {
             sleep(3000);
             telemetry.update();
 
-            if (zone == SamplePipeline.TYPE.ZONE1 || zone == SamplePipeline.TYPE.ZONE4)
+            if (zone == SamplePipeline.TYPE.ZONE1)
             {
+                //driving/camera part
                 telemetry.addLine("Zone 1");
                 robot.driving.vertical(0.75f);
                 telemetry.addLine("driving vertically");
@@ -112,15 +113,22 @@ public class OpenCV extends LinearOpMode {
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
                 sleep(300);
+                
+                //parking part
+                robot.driving.horizontal(-1);
+                telemetry.addLine("driving horizontally");
+                sleep(1500);
+                robot.driving.stop();
                 //robot.arm.claw.controlClaw(Claw.ClawPos.STOP);
                 //sleep(200);
             }
-            else if (zone == SamplePipeline.TYPE.ZONE2 || zone == SamplePipeline.TYPE.ZONE5){
+            else if (zone == SamplePipeline.TYPE.ZONE2){
                 //signalPark(2,Location.RedTop);
                 /*
                 autonLibrary.strafingSigmoid(0,-1,0,15, this, simpleDriving); //moves forward one square mat
                 sleep (50);
                  */
+                //driving/camera part
                 telemetry.addLine("Zone 2");
                 robot.driving.vertical(1);
                 telemetry.addLine("driving vertically");
@@ -128,8 +136,14 @@ public class OpenCV extends LinearOpMode {
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
                 sleep(300);
+                
+                //parking part
+                robot.driving.horizontal(-1);
+                telemetry.addLine("driving horizontally");
+                sleep(1700);
+                robot.driving.stop();
             }
-            else if (zone == SamplePipeline.TYPE.ZONE3 || zone == SamplePipeline.TYPE.ZONE6){
+            else if (zone == SamplePipeline.TYPE.ZONE3){
                 //signalPark(2,Location.RedTop);
                 /*
                 autonLibrary.strafingSigmoid(0,-1,0,5, this, simpleDriving); //moves forward one square mat
@@ -137,6 +151,7 @@ public class OpenCV extends LinearOpMode {
                 autonLibrary.strafingSigmoid(1,0,0,700,this,simpleDriving); //moves right one square
                 sleep (500);
                  */
+                //driving/camera part
                 telemetry.addLine("Zone 3");
                 robot.driving.vertical(0.75f);
                 telemetry.addLine("driving vertically");
@@ -148,6 +163,86 @@ public class OpenCV extends LinearOpMode {
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
                 sleep(300);
+                
+                //parking part
+                robot.driving.horizontal(-1);
+                telemetry.addLine("driving horizontally");
+                sleep(2000);
+                robot.driving.stop();
+            }
+            else if (zone == SamplePipeline.TYPE.ZONE4)
+            {
+                //camera part
+                telemetry.addLine("Zone 4");
+                robot.driving.vertical(0.75f);
+                telemetry.addLine("driving vertically");
+                sleep(1200);
+                robot.driving.stop();
+                robot.driving.horizontal(-1);
+                telemetry.addLine("driving horizontally");
+                sleep(500);
+                robot.driving.stop();
+                robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
+                sleep(300);
+                robot.driving.stop();
+                //parking part
+                robot.driving.vertical(-0.75f);
+                telemetry.addLine("driving vertically");
+                sleep(200);
+                robot.driving.stop();
+                robot.driving.horizontal(1);
+                telemetry.addLine("driving horizontally");
+                sleep(2000);
+                //robot.arm.claw.controlClaw(Claw.ClawPos.STOP);
+                //sleep(200);
+            }
+            else if (zone == SamplePipeline.TYPE.ZONE5){
+                //signalPark(2,Location.RedTop);
+                /*
+                autonLibrary.strafingSigmoid(0,-1,0,15, this, simpleDriving); //moves forward one square mat
+                sleep (50);
+                 */
+                //driving/camera part
+                telemetry.addLine("Zone 5");
+                robot.driving.vertical(1);
+                telemetry.addLine("driving vertically");
+                sleep(900);
+                robot.driving.stop();
+                robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
+                sleep(300);
+
+                //parking part
+                robot.driving.horizontal(1);
+                telemetry.addLine("driving horizontally");
+                sleep(1700);
+                robot.driving.stop();
+            }
+            else if (zone == SamplePipeline.TYPE.ZONE6){
+                //signalPark(2,Location.RedTop);
+                /*
+                autonLibrary.strafingSigmoid(0,-1,0,5, this, simpleDriving); //moves forward one square mat
+                sleep (50);
+                autonLibrary.strafingSigmoid(1,0,0,700,this,simpleDriving); //moves right one square
+                sleep (500);
+                 */
+                //driving/camera part
+                telemetry.addLine("Zone 6");
+                robot.driving.vertical(0.75f);
+                telemetry.addLine("driving vertically");
+                sleep(1200);
+                robot.driving.stop();
+                robot.driving.horizontal(0.75f);
+                telemetry.addLine("driving horizontally");
+                sleep(860);
+                robot.driving.stop();
+                robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
+                sleep(300);
+
+                //parking part
+                robot.driving.horizontal(1);
+                telemetry.addLine("driving horizontally");
+                sleep(1500);
+                robot.driving.stop();
             }
             /*autonLibrary.strafingSigmoid(1,0,0,2100, this, drivingLibrary); //strafes to the left for 2100 ms
             sleep (2100);*/
