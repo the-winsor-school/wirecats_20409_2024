@@ -183,8 +183,9 @@ public class OpenCV extends LinearOpMode {
                 sleep(500);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
+                sleep(1000);
                 robot.driving.stop();
+
                 //parking part
                 robot.driving.vertical(-0.75f);
                 telemetry.addLine("driving vertically");
@@ -209,9 +210,13 @@ public class OpenCV extends LinearOpMode {
                 sleep(900);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
+                sleep(1000);
+                robot.driving.stop();
 
                 //parking part
+                robot.driving.vertical(-0.75f);
+                telemetry.addLine("driving vertically");
+                sleep(500);
                 robot.driving.horizontal(1);
                 telemetry.addLine("driving horizontally");
                 sleep(1700);
@@ -236,9 +241,13 @@ public class OpenCV extends LinearOpMode {
                 sleep(860);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
-                sleep(300);
+                sleep(1000);
+                robot.driving.stop();
 
                 //parking part
+                robot.driving.vertical(-0.75f);
+                telemetry.addLine("driving vertically");
+                sleep(500);
                 robot.driving.horizontal(1);
                 telemetry.addLine("driving horizontally");
                 sleep(1500);
