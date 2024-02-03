@@ -79,6 +79,8 @@ public class OpenCVNoParking extends LinearOpMode {
  */
 
         if (opModeIsActive()) {
+            robot.arm.claw.controlClaw(Claw.ClawPos.CLOSE);
+            sleep(1000);
             telemetry.addData("debug", "start");
             telemetry.update();
             sleep(3000);
@@ -105,7 +107,7 @@ public class OpenCVNoParking extends LinearOpMode {
                 telemetry.addLine("Zone 1");
                 robot.driving.vertical(0.75f);
                 telemetry.addLine("driving vertically");
-                sleep(1325);
+                sleep(1250);
                 robot.driving.stop();
                 robot.driving.horizontal(-1);
                 telemetry.addLine("driving horizontally");

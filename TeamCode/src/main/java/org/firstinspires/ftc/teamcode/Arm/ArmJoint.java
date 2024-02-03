@@ -23,6 +23,8 @@ public class ArmJoint {
      */
     DcMotor.ZeroPowerBehavior stopBehaviour;
 
+    int currentPosition;
+
     /**
      * tolerance used for this joint
      * (which is how accurate it will try to get to the exact target position)
@@ -36,6 +38,7 @@ public class ArmJoint {
         this.powerUsed = powerUsed;
         this.armTolerance = armTolerance;
         stopBehaviour = DcMotor.ZeroPowerBehavior.BRAKE;
+        currentPosition = 0;
     }
 
     public void setStopBehaviour(DcMotor.ZeroPowerBehavior newBehaviour) {
@@ -111,7 +114,11 @@ public class ArmJoint {
      *
      * @return the current position (integer)
      */
-    public int getCurrentPosition() { return motor.getCurrentPosition(); }
+    public int getCurrentPosition() { return currentPosition; }
+
+    public void updatePosition() {
+        currentPosition = motor.getCurrentPosition();
+    }
 
     /**
      *

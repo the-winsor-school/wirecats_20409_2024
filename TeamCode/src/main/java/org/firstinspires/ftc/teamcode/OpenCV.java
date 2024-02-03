@@ -80,6 +80,8 @@ public class OpenCV extends LinearOpMode {
  */
 
         if (opModeIsActive()) {
+            robot.arm.claw.controlClaw(Claw.ClawPos.CLOSE);
+            sleep(1000);
             telemetry.addData("debug", "start");
             telemetry.update();
             sleep(3000);
