@@ -14,12 +14,13 @@ public class TeleOp extends LinearOpMode {
 
         robot = new Robot(this);
         robot.arm.resetEncoders();
-        robot.arm.clawAngleJoint.updatePosition();
-        robot.arm.cascadeLift.updatePosition();
+
 
         waitForStart();
 
         while (opModeIsActive()) {
+            robot.arm.clawAngleJoint.updatePosition();
+            robot.arm.cascadeLift.updatePosition();
 
             //_______________________________________________
             //             MAIN CONTROLLER
