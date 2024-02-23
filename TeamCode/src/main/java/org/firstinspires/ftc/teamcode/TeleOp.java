@@ -55,7 +55,7 @@ public class TeleOp extends LinearOpMode {
             if (gamepad2.dpad_right)
                 robot.arm.clawAngleJoint.changeTargetPosition(25);
             else if (gamepad2.dpad_left)
-                robot.arm.clawAngleJoint.changeTargetPosition(-25);
+                robot.arm.clawAngleJoint.changeTargetPosition(-15);
             else
                 robot.arm.clawAngleJoint.changeTargetPosition(0);
 

@@ -161,11 +161,11 @@ public class OpenCVNoParking extends LinearOpMode {
                 telemetry.addLine("Zone 4");
                 robot.driving.vertical(0.75f);
                 telemetry.addLine("driving vertically");
-                sleep(1325);
+                sleep(1250);
                 robot.driving.stop();
                 robot.driving.horizontal(-1);
                 telemetry.addLine("driving horizontally");
-                sleep(575);
+                sleep(500);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
                 sleep(1000);
@@ -181,7 +181,7 @@ public class OpenCVNoParking extends LinearOpMode {
                 telemetry.addLine("Zone 5");
                 robot.driving.vertical(1);
                 telemetry.addLine("driving vertically");
-                sleep(1050);
+                sleep(875);
                 robot.driving.stop();
                 robot.arm.claw.controlClaw(Claw.ClawPos.OPEN);
                 sleep(1000);
@@ -336,7 +336,7 @@ public class OpenCVNoParking extends LinearOpMode {
             else if (averageBlue2 < averageRed2 && averageGreen2 < averageRed2 && averageRed1 > averageRed2  && averageRed2 < averageRed3) {
                 type = TYPE.ZONE5;
             }
-            else if (averageBlue3 < averageRed3 && averageGreen3 < averageRed3 && averageRed1 > averageRed3 && averageRed2 > averageRed3 && averageRed1 > averageRed2) {
+            else if (averageBlue3 < averageRed3 && averageGreen3 < averageRed3 && averageRed1 > averageRed3 && averageRed2 > averageRed3) {
                 type = TYPE.ZONE6;
             }
             else {
