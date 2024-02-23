@@ -23,8 +23,8 @@ public class Claw {
                 break;
 
             case CLOSE:
-                right.setPower(0.7);
-                left.setPower(0);
+                right.setPower(0.0);
+                left.setPower(0.7);
                 break;
         }
     }
