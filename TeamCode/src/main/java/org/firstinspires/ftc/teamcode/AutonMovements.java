@@ -20,7 +20,6 @@ public class AutonMovements {
      * can hanlde simple parking from all positions on the field
      * @param fieldPosition where you start on the field (ex CLOSE_RED, FAR_BLUE)
      */
-
     public void SimplePark(FieldPosition fieldPosition) {
 
         //if position is close use ClosePark movements and call that function
@@ -30,6 +29,7 @@ public class AutonMovements {
 
         else if (fieldPosition == FieldPosition.FAR_BLUE
                 || fieldPosition == FieldPosition.FAR_RED){ //for far field positions
+
             /**
              * will either be -1 or 1 bases on blue or red starting positions
              * will be multiplyed by the horizontal vlues
